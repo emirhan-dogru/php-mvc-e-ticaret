@@ -1,0 +1,29 @@
+{
+  "name": "mustafao/e-ticaret",
+  "description": "MVC E-ticaret Projesi",
+  "authors": [
+    {
+      "name": "Mustafa ÖZTÜRK",
+      "email": "bay.mustafa.37@hotmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Core\\": "./Core",
+      "App\\": "./App"
+    },
+    "files": [
+      "./Core/helper.php"
+    ]
+  },
+  "require": {
+    "izniburak/router": "^2.4",
+    "filp/whoops": "^2.14",
+    "illuminate/database": "^8.80",
+    "arrilot/dotenv-php": "^2.0",
+    "jenssegers/blade": "^1.4",
+    "aura/session": "^2.1",
+    "symfony/password-hasher": "^5.4",
+    "jenssegers/date": "^4.0"
+  }
+}
