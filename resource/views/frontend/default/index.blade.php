@@ -10,16 +10,16 @@
     </div>
 
     <div class="row">
-
+      @foreach (App\Models\GetProductsView::get() as $item)
       <div class="col-6 col-sm-6 col-md-4 col-lg-3">
         <div class="card mb-7" data-toggle="card-collapse">
-          <img class="card-img-top" src="assets/img/products/product-7.jpg" alt="..." />
+          <img class="card-img-top" src="{{ base_url($item->image_path."/".$item->small_image) }}" alt="..." height="247px" />
           <div class="card-collapse-parent">
             <div class="card-body px-0 pb-0 bg-white">
               <div class="row no-gutters">
                 <div class="col">
                   <a class="d-block font-weight-bold text-body" href="product.html">
-                    Snekers CLKS Ayakkabı
+                    {{ $item->title }}
                   </a>
 
                   <a class="font-size-xs text-muted" href="#">
@@ -29,10 +29,25 @@
                 </div>
                 <div class="col-auto">
 
+                  @if( $item->sale_price > 0 )
+
+                  <div class="font-size-sm text-muted small">
+                    <del>  {{ $item->price }} TL</del>
+                   </div>
+
+                   <div class="font-size-sm font-weight-bold text-primary">
+                    {{ $item->sale_price }} TL
+                   </div>
+
+                  @else
 
                   <div class="font-size-sm font-weight-bold text-primary">
-                    99.90 TL
+                    {{ $item->price }} TL
                   </div>
+
+                  @endif
+
+              
 
                 </div>
               </div>
@@ -40,129 +55,7 @@
           </div>
         </div>
       </div>
-
-
-      <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-        <div class="card mb-7" data-toggle="card-collapse">
-          <img class="card-img-top" src="assets/img/products/product-7.jpg" alt="..." />
-          <div class="card-collapse-parent">
-            <div class="card-body px-0 pb-0 bg-white">
-              <div class="row no-gutters">
-                <div class="col">
-                  <a class="d-block font-weight-bold text-body" href="product.html">
-                    Snekers CLKS Ayakkabı
-                  </a>
-
-                  <a class="font-size-xs text-muted" href="#">
-                    Ayakkabı
-                  </a>
-
-                </div>
-                <div class="col-auto">
-
-
-                  <div class="font-size-sm font-weight-bold text-primary">
-                    99.90 TL
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-        <div class="card mb-7" data-toggle="card-collapse">
-          <img class="card-img-top" src="assets/img/products/product-7.jpg" alt="..." />
-          <div class="card-collapse-parent">
-            <div class="card-body px-0 pb-0 bg-white">
-              <div class="row no-gutters">
-                <div class="col">
-                  <a class="d-block font-weight-bold text-body" href="product.html">
-                    Snekers CLKS Ayakkabı
-                  </a>
-
-                  <a class="font-size-xs text-muted" href="#">
-                    Ayakkabı
-                  </a>
-
-                </div>
-                <div class="col-auto">
-
-
-                  <div class="font-size-sm font-weight-bold text-primary">
-                    99.90 TL
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-        <div class="card mb-7" data-toggle="card-collapse">
-          <img class="card-img-top" src="assets/img/products/product-7.jpg" alt="..." />
-          <div class="card-collapse-parent">
-            <div class="card-body px-0 pb-0 bg-white">
-              <div class="row no-gutters">
-                <div class="col">
-                  <a class="d-block font-weight-bold text-body" href="product.html">
-                    Snekers CLKS Ayakkabı
-                  </a>
-
-                  <a class="font-size-xs text-muted" href="#">
-                    Ayakkabı
-                  </a>
-
-                </div>
-                <div class="col-auto">
-
-
-                  <div class="font-size-sm font-weight-bold text-primary">
-                    99.90 TL
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-        <div class="card mb-7" data-toggle="card-collapse">
-          <img class="card-img-top" src="assets/img/products/product-7.jpg" alt="..." />
-          <div class="card-collapse-parent">
-            <div class="card-body px-0 pb-0 bg-white">
-              <div class="row no-gutters">
-                <div class="col">
-                  <a class="d-block font-weight-bold text-body" href="product.html">
-                    Snekers CLKS Ayakkabı
-                  </a>
-
-                  <a class="font-size-xs text-muted" href="#">
-                    Ayakkabı
-                  </a>
-
-                </div>
-                <div class="col-auto">
-
-
-                  <div class="font-size-sm font-weight-bold text-primary">
-                    99.90 TL
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    @endforeach
 
 
 

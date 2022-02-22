@@ -61,6 +61,8 @@ $app->router->group(config("BASE_PATH") . "/admin", function ($router) {
     $router->post("/update-admin", 'Backend/AdminController@UpdateAdmin');
 
     $router->post("/update-user", 'Backend/AdminController@UpdateUser');
+    $router->post("/product-add", "Backend/ProductController@AddProduct");
+    
     $router->get('/admin-logout' , function() {
 auth()->remove("adminAuth");
 header("Location:" . base_url('admin/login?durum=basarili&mesaj=oturum Başarıyla Kapatıldı!'));

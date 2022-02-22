@@ -36,8 +36,8 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Ürünler:</h6>
-                <a class="collapse-item" href="buttons.html">Ürün Listesi</a>
-                <a class="collapse-item" href="cards.html">Ürün Ekle</a>
+                <a class="collapse-item" href="{{ base_url("admin/urunler") }}">Ürün Listesi</a>
+                     <a class="collapse-item" href="{{ base_url("admin/urun-ekle") }}">Ürün Ekle</a>
             </div>
         </div>
     </li>

@@ -1,6 +1,8 @@
 <?php
 
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactory;
+use App\Models\AdminNotifications;
+use Cocur\Slugify\Slugify;
 
 function config($key, $default = "")
 {
@@ -77,3 +79,37 @@ function format_date($date, $format = 'd/F/Y H:i')
     $date_formatter->setlocale('tr');
     return $date_formatter->parse($date)->format($format);
 }
+
+function addAdminNotification( $title, $type = "success" ){
+       
+    AdminNotifications::create(
+          [
+              "title"=> $title, 
+              "type" =>$type 
+           ]
+      );
+
+  }
+
+
+  function slug( $text ){        
+      $slugify = new Slugify();
+      return $slugify->slugify( $text );
+  }
+
+
+  function upload( $name ){
+      return \Core\Upload::getInstance($name);
+  }
+
+  function guid() {
+      if (function_exists('com_create_guid') === true)
+      {
+          return trim(com_create_guid(), '{}');
+      }
+      return sprintf('%04X%04X-%04X-%04X-%04X-%04X%04X%04X', mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(16384, 20479), mt_rand(32768, 49151), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535));
+  }
+
+  function imgDir(){
+      return "uploads/".date("Y")."/".date("m");
+  }
