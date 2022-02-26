@@ -4,16 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Admins extends Model {
-    protected $table = 'admins';
+class BasketVariants extends Model {
+    protected $table = 'basket_variants';
 
     public $timestamps = false;
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'name_surname',
-        'email',
-        'password'
+        'basket_id',
+        'variant_id'
     ];
 }
 

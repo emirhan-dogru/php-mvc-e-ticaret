@@ -3,6 +3,10 @@
 
 namespace App\Controllers\Frontend;
 
+use App\Models\GetCategoriesView;
+use App\Models\ProductImages;
+use App\Models\Products;
+use App\Models\ProductVariants;
 use Core\Controller;
 
 class IndexController extends Controller{
@@ -16,8 +20,49 @@ class IndexController extends Controller{
         return $this->view('frontend.product.index');
      }
 
-     public function ProductDetailPage(){
-        return $this->view('frontend.product.detail');
+     public function ProductDetailPage($slug , $id){
+        $product = Products::where(['id' => $id , 'slug' => $slug])->get()->first();
+
+        if ($product) {
+            $product = $product->toArray();
+
+
+            $images = ProductImages::where('product_id' , $id)->orderBy('image_order' , 'ASC')->get();
+
+            if ($images) {
+                $images = $images->toArray();
+            }
+            else {
+                  $images = [];
+            }
+
+            $categories = GetCategoriesView::where(['status' => 1 , 'product_id' => $id])->get();
+
+            if ($categories) {
+                $categories = $categories->toArray();
+            }
+            else {
+                $categories = [];
+            }
+
+            $variants = [];
+            $variantGroups = ProductVariants::where('product_id' , $id)->groupBy('variant_name')->get();
+
+            foreach ($variantGroups as $group) {
+                $variantItems = ProductVariants::where(['product_id' => $id , 'variant_name' => $group->variant_name])->get()->toArray();
+                $variants[$group->variant_name] = $variantItems;
+
+
+            }
+
+        }
+        else {
+           redirect('404');
+        }
+
+       
+   
+        return $this->view('frontend.product.detail' , compact('product' , 'images' , 'categories' , 'variants'));
      }
 
      public function BasketPage(){

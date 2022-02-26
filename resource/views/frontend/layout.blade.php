@@ -22,6 +22,8 @@
   <!-- Theme CSS -->
   <link rel="stylesheet" href="assets/css/theme.min.css">
 
+  @stack('css')
+
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154926440-1"></script>
   <script>
@@ -36,7 +38,7 @@
 
   </script>
 
-  <title>Shopper</title>
+  <title>@yield('title' , 'E-Ticaret')</title>
 
 </head>
 <body>

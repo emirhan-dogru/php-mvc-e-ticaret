@@ -1,5 +1,17 @@
 @extends('frontend.layout')
 
+@section('title' , $product['title'])
+
+@push('css')
+<style>
+  .categoryItem:not(:last-child)::after{
+    content: '-';
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+</style>
+@endpush
+
 @section('content')
 <!-- PRODUCT -->
 <section class="pt-5">
@@ -13,27 +25,22 @@
               <div class="card">
 
                 <!-- Badge -->
+                @if($product['sale_price'] && $product['sale_price'] > 0) 
                 <div class="badge badge-primary card-badge text-uppercase">
-                  Sale
+                  İndirim
                 </div>
+                @endif
 
                 <!-- Slider -->
                 <div class="mb-4" data-flickity='{"draggable": false, "fade": true}' id="productSlider">
 
+                  @foreach($images as $image)
                   <!-- Item -->
-                  <a href="assets/img/products/product-7.jpg" data-fancybox>
-                    <img src="assets/img/products/product-7.jpg" alt="..." class="card-img-top">
+                  <a href="{{ base_url($image['image_path'] . '/' . $image['original_image']) }}" data-fancybox>
+                    <img src="{{ base_url($image['image_path'] . '/' . $image['original_image']) }}" height="430px" alt="..." class="card-img-top">
                   </a>
-
-                  <!-- Item -->
-                  <a href="assets/img/products/product-122.jpg" data-fancybox>
-                    <img src="assets/img/products/product-122.jpg" alt="..." class="card-img-top">
-                  </a>
-
-                  <!-- Item -->
-                  <a href="assets/img/products/product-146.jpg" data-fancybox>
-                    <img src="assets/img/products/product-146.jpg" alt="..." class="card-img-top">
-                  </a>
+                  @endforeach
+                 
 
                 </div>
 
@@ -42,29 +49,13 @@
               <!-- Slider -->
               <div class="flickity-nav mx-n2 mb-10 mb-md-0" data-flickity='{"asNavFor": "#productSlider", "contain": true, "wrapAround": false}'>
 
+                @foreach($images as $image)
                 <!-- Item -->
                 <div class="col-12 px-2" style="max-width: 113px;">
-
                   <!-- Image -->
-                  <div class="embed-responsive embed-responsive-1by1 bg-cover" style="background-image: url(assets/img/products/product-7.jpg);"></div>
-
+                  <div class="embed-responsive embed-responsive-1by1 bg-cover" style="background-image: url({{ base_url($image['image_path'] . '/' . $image['small_image']) }});"></div>
                 </div>
-
-                <!-- Item -->
-                <div class="col-12 px-2" style="max-width: 113px;">
-
-                  <!-- Image -->
-                  <div class="embed-responsive embed-responsive-1by1 bg-cover" style="background-image: url(assets/img/products/product-122.jpg);"></div>
-
-                </div>
-
-                <!-- Item -->
-                <div class="col-12 px-2" style="max-width: 113px;">
-
-                  <!-- Image -->
-                  <div class="embed-responsive embed-responsive-1by1 bg-cover" style="background-image: url(assets/img/products/product-146.jpg);"></div>
-
-                </div>
+                @endforeach
 
               </div>
 
@@ -75,8 +66,9 @@
               <div class="row mb-1">
                 <div class="col">
 
-                  <!-- Preheading -->
-                  <a class="text-muted" href="shop.html">Sneakers</a>
+                  @foreach($categories as $category)
+                  <a class="text-muted categoryItem" href="">{{ $category['title'] }}</a>
+                  @endforeach
 
                 </div>
                 <div class="col-auto">
@@ -108,27 +100,36 @@
               </div>
 
               <!-- Heading -->
-              <h3 class="mb-2">Leather Sneakers</h3>
+              <h3 class="mb-2">{{ $product['title'] }}</h3>
 
               <!-- Price -->
               <div class="mb-7">
-                <span class="font-size-lg font-weight-bold text-gray-350 text-decoration-line-through">$115.00</span>
-                <span class="ml-1 font-size-h5 font-weight-bolder text-primary">$85.00</span>
-                <span class="font-size-sm ml-1">(In Stock)</span>
+                @if($product['sale_price'] && $product['sale_price'] > 0) 
+                <span class="font-size-lg font-weight-bold text-gray-350 text-decoration-line-through">{{ $product['price'] }}</span>
+                <span class="ml-1 font-size-h5 font-weight-bolder text-primary">{{ $product['sale_price'] }}</span>
+
+                @else
+
+                <span class="font-size-h5 font-weight-bolder text-primary">{{ $product['price'] }}</span>
+                @endif
+                
+                <span class="font-size-sm ml-1">({{ $product['stock'] }})</span>
               </div>
 
               <!-- Form -->
-              <form>
-                <div class="form-group">
-
-                  <!-- Label -->
-                  <p class="mb-5">
-                    Color: <strong id="colorCaption">White</strong>
-                  </p>
-
-
-
+              {!! auth()->get('userLogin') ? "<form action=". base_url("basket-add") . '/' . $product['id'] ." method=POST > " : '' !!}
+                @foreach ($variants as $key => $variant)
+                <div class="row mb-4 bg-light rounded border">
+                  <div class="col-md-12 font-weight-bold">
+                    {{ $key }}
+                  </div>
+                  @foreach ($variant as $item)
+                  <div class="col-md-3 bg-white rounded border">
+                   <input type="radio" name="{{ $key }}" value="{{ $item['id'] }}">{{ $item['variant_value'] }}
+                  </div>
+                  @endforeach
                 </div>
+                @endforeach
                 <div class="form-group">
 
 
@@ -150,9 +151,15 @@
                     <div class="col-12 col-lg">
 
                       <!-- Submit -->
+                      @if (auth()->get('userLogin'))
                       <button type="submit" class="btn btn-block btn-dark mb-2">
                         Sepete Ekle <i class="fe fe-shopping-cart ml-2"></i>
                       </button>
+                      @else
+                      <a href="/login" class="btn btn-block btn-dark mb-2">
+                        Sepete Ekle
+                      </a>
+                      @endif
 
                     </div>
                   </div>
@@ -160,7 +167,7 @@
 
 
                 </div>
-              </form>
+                {!! auth()->get('userLogin') ? "</form>" : '' !!}
 
             </div>
           </div>
@@ -195,46 +202,10 @@
                 <div class="col-12 col-lg-10 col-xl-8">
                   <div class="row">
                     <div class="col-12">
-
                       <!-- Text -->
                       <p class="text-gray-500">
-                        Won't herb first male seas, beast. Let upon, female upon third fifth every. Man subdue rule after years herb after
-                        form. And image may, morning. Behold in tree day sea that together cattle whose. Fifth gathering brought
-                        bearing. Abundantly creeping whose. Beginning form have void two. A whose.
+                       {{ $product['description'] }}
                       </p>
-
-                    </div>
-                    <div class="col-12 col-md-6">
-
-                      <!-- List -->
-                      <ul class="list list-unstyled mb-md-0 text-gray-500">
-                        <li>
-                          <strong class="text-body">SKU</strong>: #61590437
-                        </li>
-                        <li>
-                          <strong class="text-body">Occasion</strong>: Lifestyle, Sport
-                        </li>
-                        <li>
-                          <strong class="text-body">Country</strong>: Italy
-                        </li>
-                      </ul>
-
-                    </div>
-                    <div class="col-12 col-md-6">
-
-                      <!-- List -->
-                      <ul class="list list-unstyled mb-0">
-                        <li>
-                          <strong>Outer</strong>: Leather 100%, Polyamide 100%
-                        </li>
-                        <li>
-                          <strong>Lining</strong>: Polyester 100%
-                        </li>
-                        <li>
-                          <strong>CounSoletry</strong>: Rubber 100%
-                        </li>
-                      </ul>
-
                     </div>
                   </div>
                 </div>

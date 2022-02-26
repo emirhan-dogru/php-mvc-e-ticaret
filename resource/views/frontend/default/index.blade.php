@@ -13,17 +13,19 @@
       @foreach (App\Models\GetProductsView::get() as $item)
       <div class="col-6 col-sm-6 col-md-4 col-lg-3">
         <div class="card mb-7" data-toggle="card-collapse">
+          <a href="{{ base_url("urun/" . $item->slug . "/" . $item->id)  }}">
           <img class="card-img-top" src="{{ base_url($item->image_path."/".$item->small_image) }}" alt="..." height="247px" />
+        </a>
           <div class="card-collapse-parent">
             <div class="card-body px-0 pb-0 bg-white">
               <div class="row no-gutters">
                 <div class="col">
-                  <a class="d-block font-weight-bold text-body" href="product.html">
+                  <a class="d-block font-weight-bold text-body" href="{{ base_url("urun/" . $item->slug . "/" . $item->id)  }}">
                     {{ $item->title }}
                   </a>
 
-                  <a class="font-size-xs text-muted" href="#">
-                    Ayakkabı
+                  <a class="font-size-xs text-muted" href="{{ base_url("kategori/$item->category_slug") }}">
+                    {{ $item->category_title }}
                   </a>
 
                 </div>

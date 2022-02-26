@@ -72,7 +72,7 @@ class ProductController extends Controller{
                         }
                     }
 
-
+                      $imageOrder = 1;
                       foreach( $files as $file ){
                         $name = guid();
                         $directory = imgDir();
@@ -87,7 +87,7 @@ class ProductController extends Controller{
                             "original_image" => $original->getFile(),
                             "small_image" => "small_". $small->getFile(),
                             "image_path" => $directory,
-                            "image_order" => 1
+                            "image_order" => $imageOrder
                         ];
 
                        $addImage = ProductImages::create( $saveImage );
@@ -109,6 +109,7 @@ class ProductController extends Controller{
                         if(!$addCategory){
                             throw "Ürün kategorisi eklenirken hata oluştu. Daha Sonra tekrar deneyin";
                         }
+                        $imageOrder++;
                       }
 
 

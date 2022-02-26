@@ -18,7 +18,7 @@ $app->router->get(config("BASE_PATH") . '/generate', function () {
 
 $app->router->get(config("BASE_PATH") . "/", "Frontend/IndexController@IndexPage");
 $app->router->get(config("BASE_PATH") . "/urunler", "Frontend/IndexController@ProductPage");
-$app->router->get(config("BASE_PATH") . "/urun", "Frontend/IndexController@ProductDetailPage");
+$app->router->get(config("BASE_PATH") . "/urun/:slug/:id", "Frontend/IndexController@ProductDetailPage");
 $app->router->get(config("BASE_PATH") . "/sepet", "Frontend/IndexController@BasketPage");
 $app->router->get(config("BASE_PATH") . "/odeme", "Frontend/IndexController@PaymentPage");
 $app->router->get(config("BASE_PATH") . "/hesabim", "Frontend/IndexController@MyAccountPage" , ['before' => 'UserAuth']);
@@ -33,6 +33,8 @@ $app->router->get(config("BASE_PATH") . "/logout", function() {
 auth()->remove('userLogin');
 redirect('giris-yap' , true , 'Oturum Başarıyla Kapatıldı');
 }, ['before' => "UserAuth"]);
+
+$app->router->post(config("BASE_PATH") . "/basket-add", "Frontend/BasketController@AddBasket");
 
 
 

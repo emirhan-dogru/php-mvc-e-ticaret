@@ -66,11 +66,12 @@ function redirect($url = "", $status = null, $message = null)
 {
 
     $tmpMessage = '';
-    if ($status != null || $status == false) {
+    if ($status != null || $message != null) {
         $tmpMessage = '?durum=' . ($status ? 'basarili' : 'hata')  . '&mesaj=' . $message;
     }
 
     header('Location:' . base_url($url . $tmpMessage));
+    exit;
 }
 
 function format_date($date, $format = 'd/F/Y H:i')
