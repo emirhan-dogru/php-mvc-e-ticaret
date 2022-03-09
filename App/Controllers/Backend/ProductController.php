@@ -2,11 +2,15 @@
 
 namespace App\Controllers\Backend;
 
+use App\Models\OrderProducts;
+use App\Models\Orders;
 use Core\Controller;
+use Core\Upload;
 use App\Models\Products;
 use App\Models\ProductVariants;
 use App\Models\ProductImages;
 use App\Models\ProductCategories;
+use Exception;
 
 class ProductController extends Controller{
 
@@ -74,10 +78,12 @@ class ProductController extends Controller{
 
                       $imageOrder = 1;
                       foreach( $files as $file ){
+                        
+
                         $name = guid();
                         $directory = imgDir();
 
-                        $upload = upload($file  );
+                        $upload = new Upload($file);
 
                         $small = $upload->resize(250)->prefix("small")->rename($name)->to( $directory);
                         $original = $upload->rename( $name)->to($directory);
@@ -145,6 +151,24 @@ class ProductController extends Controller{
 
 
 
+    }
+
+    public function EditOrder(){
+        try{
+
+            $orderUpdate = Orders::where("id", $_POST["id"])
+            ->update(["order_status" => $_POST["order_status"]]);
+
+            foreach( $_POST["product_count"] as $key=>$value ){
+               $countUpdate = OrderProducts::where("id", $key)
+                ->update(["count" =>$value ]);  
+            }
+
+            redirect("admin/siparisler", true, "İşlem başarılı");
+
+        } catch( Exception $e ){
+            redirect("admin/siparisler", false, $e->getMessage() );
+        }
     }
     
 

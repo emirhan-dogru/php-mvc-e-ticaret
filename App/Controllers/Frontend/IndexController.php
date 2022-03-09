@@ -4,6 +4,7 @@
 namespace App\Controllers\Frontend;
 
 use App\Models\GetCategoriesView;
+use App\Models\OrderListsView;
 use App\Models\ProductImages;
 use App\Models\Products;
 use App\Models\ProductVariants;
@@ -74,7 +75,16 @@ class IndexController extends Controller{
      }
 
      public function MyAccountPage() {
-      return $this->view('frontend.account.index');
+        $orders = OrderListsView::where("user_id", auth()->get("userLogin")["id"] )->orderBy("id", "desc");
+
+        $perPage = isset( $_GET["perPage"] ) ? $_GET["perPage"] : 10 ;
+        $showColummns = ["*"];
+        $getUrl = "page";
+        $page = isset( $_GET[$getUrl] ) ? $_GET[$getUrl] : 1 ;
+  
+        $orders = $orders->paginate( $perPage,$showColummns, $getUrl, $page  )->toArray();
+
+        return $this->view('frontend.account.index' , compact("orders"));
      }
 
      public function LoginPage() {

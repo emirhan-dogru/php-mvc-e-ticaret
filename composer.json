@@ -26,6 +26,7 @@
     "symfony/password-hasher": "^5.4",
     "jenssegers/date": "^4.0",
     "cocur/slugify": "^4.1",
-    "verot/class.upload.php": "^2.1"
+    "verot/class.upload.php": "^2.1",
+    "illuminate/pagination": "^8.83"
   }
 }

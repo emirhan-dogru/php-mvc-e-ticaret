@@ -131,4 +131,8 @@ class AdminController extends Controller
             redirect('admin/kullanicilar' , false , 'İşlem Başarısız');
         }
     }
+
+    public function OrderPage() {
+        return $this->view('backend.order.index');
+    }
 }

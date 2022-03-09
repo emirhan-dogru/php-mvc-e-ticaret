@@ -1,19 +1,21 @@
 <?php
 
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Baskets extends Model {
-    protected $table = 'baskets';
+class OrderVariants extends Model {
 
-    public $timestamps = false;
-    protected $primaryKey = 'id';
+    public $timestamps  = false;
+    protected $table = "order_variants";
+    protected $primaryKey = "id";
+
 
     protected $fillable = [
-        'user_id',
-        'product_id',
-        'count'
+        "order_product_id", 
+        "variant_name",
+        "variant_value"
     ];
 
     public static function beginTransaction()
@@ -28,6 +30,7 @@ class Baskets extends Model {
     {
         self::getConnectionResolver()->connection()->rollBack();
     }
+
 }
 
 ?>

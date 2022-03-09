@@ -114,3 +114,17 @@ function addAdminNotification( $title, $type = "success" ){
   function imgDir(){
       return "uploads/".date("Y")."/".date("m");
   }
+
+  function getBasketSum($where = [] , $field = "count") {
+      if (count($where) == 0) {
+          $where = [
+                "user_id" => auth()->get('userLogin')['id'],
+                'basket_status' => 'aktif'
+        ];
+      }
+      return App\Models\Baskets::where($where)->sum($field);
+}
+
+function money($money) {
+    return number_format($money , 2 , "," , ".");
+}

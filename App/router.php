@@ -31,10 +31,14 @@ $app->router->post(config("BASE_PATH") . "/uye-ol", "Frontend/UserController@add
 
 $app->router->get(config("BASE_PATH") . "/logout", function() {
 auth()->remove('userLogin');
+
 redirect('giris-yap' , true , 'Oturum Başarıyla Kapatıldı');
 }, ['before' => "UserAuth"]);
 
-$app->router->post(config("BASE_PATH") . "/basket-add", "Frontend/BasketController@AddBasket");
+$app->router->post(config("BASE_PATH") . "/basket-add/:id", "Frontend/BasketController@AddBasket" , ['before' => 'UserAuth']);
+$app->router->get(config("BASE_PATH") . "/basket-item-delete/:id", "Frontend/BasketController@DeleteItem" , ['before' => 'UserAuth']);
+
+$app->router->post(config("BASE_PATH") . "/add-order", "Frontend/OrderController@AddOrder" , ['before' => 'UserAuth']);
 
 
 
@@ -59,11 +63,13 @@ $app->router->group(config("BASE_PATH") . "/admin", function ($router) {
     $router->get("/kullanicilar", 'Backend/AdminController@UserPage');
     $router->get("/urun-ekle", 'Backend/AdminController@ProductAddPage');
     $router->get("/yetkililer", 'Backend/AdminController@AdminListPage');
+    $router->get("/siparisler", 'Backend/AdminController@OrderPage');
     $router->post("/add-new-admin", 'Backend/AdminController@AddNewAdmin');
     $router->post("/update-admin", 'Backend/AdminController@UpdateAdmin');
 
     $router->post("/update-user", 'Backend/AdminController@UpdateUser');
     $router->post("/product-add", "Backend/ProductController@AddProduct");
+    $router->post("/edit-order", "Backend/ProductController@EditOrder");
     
     $router->get('/admin-logout' , function() {
 auth()->remove("adminAuth");
@@ -77,6 +83,8 @@ $app->router->group(config('BASE_PATH') . '/api' , function($router) {
 
     $router->get('/getAdminById/:id' , 'Backend/ApiController@getByAdminId');
     $router->get('/getUserById/:id' , 'Backend/ApiController@getByUserId');
+    $router->get( "/readAllNatifications", "Backend/ApiController@readAddNotifications" );
+    $router->get( "/getOrderDetail/:id", "Backend/ApiController@getOrderDetail" );
 
 }, ['before' => "AdminAuth"]);
 

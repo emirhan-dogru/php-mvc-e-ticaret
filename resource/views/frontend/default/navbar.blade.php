@@ -35,7 +35,7 @@
 
         <li class="nav-item ml-lg-n4">
           <a class="nav-link" data-toggle="modal" href="#modalShoppingCart">
-                <span data-cart-items="2">
+                <span data-cart-items="{{ getBasketSum() }}">
                   <i class="fe fe-shopping-cart"></i>
                 </span>
           </a>

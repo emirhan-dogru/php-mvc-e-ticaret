@@ -10,13 +10,13 @@
               <!-- Breadcrumb -->
               <ol class="breadcrumb mb-0 font-size-xs text-gray-400">
                 <li class="breadcrumb-item">
-                  <a class="text-gray-400" href="index.html">Home</a>
+                  <a class="text-gray-400" href="{{ base_url() }}">Anasayfa</a>
                 </li>
                 <li class="breadcrumb-item">
-                  <a class="text-gray-400" href="shopping-cart.html">Shopping Cart</a>
+                  <a class="text-gray-400" href="{{ base_url('sepet') }}">Sepetim</a>
                 </li>
                 <li class="breadcrumb-item active">
-                  Checkout
+                  Ödeme
                 </li>
               </ol>
   
@@ -32,7 +32,7 @@
             <div class="col-12 text-center">
   
               <!-- Heading -->
-              <h3 class="mb-4">Checkout</h3>
+              <h3 class="mb-4">Ödeme Detayları</h3>
   
               <!-- Subheading -->
               <p class="mb-10">
@@ -45,237 +45,107 @@
             <div class="col-12 col-md-7">
   
               <!-- Form -->
-              <form>
+              <form action="{{ base_url('add-order') }}" method="POST" id="formOrder">
   
                 <!-- Heading -->
-                <h6 class="mb-7">Billing Details</h6>
+                <h6 class="mb-7">Gönderim Detayları</h6>
   
-                <!-- Billing details -->
-                <div class="row mb-9">
-                  <div class="col-12 col-md-6">
-  
-                    <!-- First Name -->
-                    <div class="form-group">
-                      <label for="checkoutBillingFirstName">First Name *</label>
-                      <input class="form-control form-control-sm" id="checkoutBillingFirstName" type="text" placeholder="First Name" required>
-                    </div>
-  
+              <!-- Billing details -->
+              <div class="row mb-9">
+                <div class="col-12 col-md-6">
+
+                  <!-- First Name -->
+                  <div class="form-group">
+                    <label for="checkoutBillingFirstName">First Name *</label>
+                    <input name="first_name" required class="form-control form-control-sm" id="checkoutBillingFirstName" type="text" placeholder="First Name" required>
                   </div>
-                  <div class="col-12 col-md-6">
-  
-                    <!-- Last Name -->
-                    <div class="form-group">
-                      <label for="checkoutBillingLastName">Last Name *</label>
-                      <input class="form-control form-control-sm" id="checkoutBillingLastName" type="text" placeholder="Last Name" required>
-                    </div>
-  
-                  </div>
-                  <div class="col-12">
-  
-                    <!-- Email -->
-                    <div class="form-group">
-                      <label for="checkoutBillingEmail">Email *</label>
-                      <input class="form-control form-control-sm" id="checkoutBillingEmail" type="email" placeholder="Email" required>
-                    </div>
-  
-                  </div>
-                  <div class="col-12">
-  
-                    <!-- Company Name -->
-                    <div class="form-group">
-                      <label for="checkoutBillingCompany">Company name *</label>
-                      <input class="form-control form-control-sm" id="checkoutBillingCompany" type="text" placeholder="Company name (optional)">
-                    </div>
-  
-                  </div>
-                  <div class="col-12">
-  
-                    <!-- Country -->
-                    <div class="form-group">
-                      <label for="checkoutBillingCountry">Country *</label>
-                      <input class="form-control form-control-sm" id="checkoutBillingCountry" type="text" placeholder="Country" required>
-                    </div>
-  
-                  </div>
-                  <div class="col-12">
-  
-                    <!-- Address Line 1 -->
-                    <div class="form-group">
-                      <label for="checkoutBillingAddress">Address Line 1 *</label>
-                      <input class="form-control form-control-sm" id="checkoutBillingAddress" type="text" placeholder="Address Line 1" required>
-                    </div>
-  
-                  </div>
-                  <div class="col-12">
-  
-                    <!-- Address Line 2 -->
-                    <div class="form-group">
-                      <label for="checkoutBillingAddressTwo">Address Line 2</label>
-                      <input class="form-control form-control-sm" id="checkoutBillingAddressTwo" type="text" placeholder="Address Line 2 (optional)">
-                    </div>
-  
-                  </div>
-                  <div class="col-12 col-md-6">
-  
-                    <!-- Town / City -->
-                    <div class="form-group">
-                      <label for="checkoutBillingTown">Town / City *</label>
-                      <input class="form-control form-control-sm" id="checkoutBillingTown" type="text" placeholder="Town / City" required>
-                    </div>
-  
-                  </div>
-                  <div class="col-12 col-md-6">
-  
-                    <!-- ZIP / Postcode -->
-                    <div class="form-group">
-                      <label for="checkoutBillingZIP">ZIP / Postcode *</label>
-                      <input class="form-control form-control-sm" id="checkoutBillingZIP" type="text" placeholder="ZIP / Postcode" required>
-                    </div>
-  
-                  </div>
-                  <div class="col-12">
-  
-                    <!-- Mobile Phone -->
-                    <div class="form-group mb-0">
-                      <label for="checkoutBillingPhone">Mobile Phone *</label>
-                      <input class="form-control form-control-sm" id="checkoutBillingPhone" type="tel" placeholder="Mobile Phone" required>
-                    </div>
-  
-                  </div>
+
                 </div>
-  
-                <!-- Heading -->
-                <h6 class="mb-7">Shipping Details</h6>
-  
-                <!-- Shipping details -->
-                <div class="table-responsive mb-6">
-                  <table class="table table-bordered table-sm table-hover mb-0">
-                    <tbody>
-                      <tr>
-                        <td>
-                          <div class="custom-control custom-radio">
-                            <input class="custom-control-input" id="checkoutShippingStandard" name="shipping" type="radio">
-                            <label class="custom-control-label text-body text-nowrap" for="checkoutShippingStandard">
-                              Standard Shipping
-                            </label>
-                          </div>
-                        </td>
-                        <td>Delivery in 5 - 7 working days</td>
-                        <td>$8.00</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="custom-control custom-radio">
-                            <input class="custom-control-input" id="checkoutShippingExpress" name="shipping" type="radio">
-                            <label class="custom-control-label text-body text-nowrap" for="checkoutShippingExpress">
-                              Express Shipping
-                            </label>
-                          </div>
-                        </td>
-                        <td>Delivery in 3 - 5 working days</td>
-                        <td>$12.00</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="custom-control custom-radio">
-                            <input class="custom-control-input" id="checkoutShippingShort" name="shipping" type="radio">
-                            <label class="custom-control-label text-body text-nowrap" for="checkoutShippingShort">
-                              1 - 2 Shipping
-                            </label>
-                          </div>
-                        </td>
-                        <td>Delivery in 1 - 2 working days</td>
-                        <td>$18.00</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="custom-control custom-radio">
-                            <input class="custom-control-input" id="checkoutShippingFree" name="shipping" type="radio">
-                            <label class="custom-control-label text-body text-nowrap" for="checkoutShippingFree">
-                              Free Shipping
-                            </label>
-                          </div>
-                        </td>
-                        <td>Living won't the He one every subdue
-                          meat replenish face was you morning
-                          firmament darkness.</td>
-                        <td>$0.00</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-  
-                <!-- Address -->
-                <div class="mb-9">
-  
-                  <!-- Checkbox -->
-                  <div class="custom-control custom-checkbox">
-                    <input class="custom-control-input" id="checkoutShippingAddress" type="checkbox">
-                    <label class="custom-control-label font-size-sm" data-toggle="collapse" data-target="#checkoutShippingAddressCollapse" for="checkoutShippingAddress">
-                      Ship to a different address?
-                    </label>
+                <div class="col-12 col-md-6">
+
+                  <!-- Last Name -->
+                  <div class="form-group">
+                    <label for="checkoutBillingLastName">Last Name *</label>
+                    <input name="last_name" required class="form-control form-control-sm" id="checkoutBillingLastName" type="text" placeholder="Last Name" required>
                   </div>
-  
-                  <!-- Collapse -->
-                  <div class="collapse" id="checkoutShippingAddressCollapse">
-                    <div class="row mt-6">
-                      <div class="col-12">
-  
-                        <!-- Country -->
-                        <div class="form-group">
-                          <label for="checkoutShippingAddressCountry">Country *</label>
-                          <input class="form-control form-control-sm" id="checkoutShippingAddressCountry" type="text" placeholder="Country">
-                        </div>
-  
-                      </div>
-                      <div class="col-12">
-  
-                        <!-- Address Line 1 -->
-                        <div class="form-group">
-                          <label for="checkoutShippingAddressLineOne">Address Line 1 *</label>
-                          <input class="form-control form-control-sm" id="checkoutShippingAddressLineOne" type="text" placeholder="Address Line 1">
-                        </div>
-  
-                      </div>
-                      <div class="col-12">
-  
-                        <!-- Address Line 2 -->
-                        <div class="form-group">
-                          <label for="checkoutShippingAddressLineTwo">Address Line 2</label>
-                          <input class="form-control form-control-sm" id="checkoutShippingAddressLineTwo" type="text" placeholder="Address Line 2 (optional)">
-                        </div>
-  
-                      </div>
-                      <div class="col-6">
-  
-                        <!-- Town / City -->
-                        <div class="form-group">
-                          <label for="checkoutShippingAddressTown">Town / City *</label>
-                          <input class="form-control form-control-sm" id="checkoutShippingAddressTown" type="text" placeholder="Town / City">
-                        </div>
-  
-                      </div>
-                      <div class="col-6">
-  
-                        <!-- Town / City -->
-                        <div class="form-group">
-                          <label for="checkoutShippingAddressZIP">ZIP / Postcode *</label>
-                          <input class="form-control form-control-sm" id="checkoutShippingAddressZIP" type="text" placeholder="ZIP / Postcode">
-                        </div>
-  
-                      </div>
-                      <div class="col-12">
-  
-                        <!-- Button -->
-                        <button class="btn btn-sm btn-outline-dark" type="submit">
-                          Save Address
-                        </button>
-  
-                      </div>
-                    </div>
-                  </div>
-  
+
                 </div>
+                <div class="col-12">
+
+                  <!-- Email -->
+                  <div class="form-group">
+                    <label for="checkoutBillingEmail">Email *</label>
+                    <input name="email" class="form-control form-control-sm" id="checkoutBillingEmail" type="email" placeholder="Email" required>
+                  </div>
+
+                </div>
+                <div class="col-12">
+
+                  <!-- Company Name -->
+                  <div class="form-group">
+                    <label for="checkoutBillingCompany">Company name *</label>
+                    <input name="campany_name" class="form-control form-control-sm" id="checkoutBillingCompany" type="text" placeholder="Company name (optional)">
+                  </div>
+
+                </div>
+                <div class="col-12">
+
+                  <!-- Country -->
+                  <div class="form-group">
+                    <label for="checkoutBillingCountry">Country *</label>
+                    <input name="country" class="form-control form-control-sm" id="checkoutBillingCountry" type="text" placeholder="Country" required>
+                  </div>
+
+                </div>
+                <div class="col-12">
+
+                  <!-- Address Line 1 -->
+                  <div class="form-group">
+                    <label for="checkoutBillingAddress">Address Line 1 *</label>
+                    <input name="addres1" class="form-control form-control-sm" id="checkoutBillingAddress" type="text" placeholder="Address Line 1" required>
+                  </div>
+
+                </div>
+                <div class="col-12">
+
+                  <!-- Address Line 2 -->
+                  <div class="form-group">
+                    <label for="checkoutBillingAddressTwo">Address Line 2</label>
+                    <input name="addres2" class="form-control form-control-sm" id="checkoutBillingAddressTwo" type="text" placeholder="Address Line 2 (optional)">
+                  </div>
+
+                </div>
+                <div class="col-12 col-md-6">
+
+                  <!-- Town / City -->
+                  <div class="form-group">
+                    <label for="checkoutBillingTown">Town / City *</label>
+                    <input name="city" class="form-control form-control-sm" id="checkoutBillingTown" type="text" placeholder="Town / City" required>
+                  </div>
+
+                </div>
+                <div class="col-12 col-md-6">
+
+                  <!-- ZIP / Postcode -->
+                  <div class="form-group">
+                    <label for="checkoutBillingZIP">ZIP / Postcode *</label>
+                    <input name="post_code" class="form-control form-control-sm" id="checkoutBillingZIP" type="text" placeholder="ZIP / Postcode" required>
+                  </div>
+
+                </div>
+                <div class="col-12">
+
+                  <!-- Mobile Phone -->
+                  <div class="form-group mb-0">
+                    <label for="checkoutBillingPhone">Mobile Phone *</label>
+                    <input name="phone" class="form-control form-control-sm" id="checkoutBillingPhone" type="tel" placeholder="Mobile Phone" required>
+                  </div>
+
+                </div>
+              </div>
+                
+
+  
   
   
                 <!-- Heading -->
@@ -289,17 +159,17 @@
                     <div class="custom-control custom-radio">
   
                       <!-- Input -->
-                      <input class="custom-control-input" id="checkoutPaymentCard" name="payment" type="radio" data-toggle="collapse" data-action="show" data-target="#checkoutPaymentCardCollapse">
+                      <input value="kredi_karti" class="custom-control-input" id="checkoutPaymentCard" name="payment" type="radio" data-toggle="collapse" data-action="show" data-target="#checkoutPaymentCardCollapse">
   
                       <!-- Label -->
                       <label class="custom-control-label font-size-sm text-body text-nowrap" for="checkoutPaymentCard">
-                        Credit Card <img class="ml-2" src="assets/img/brands/color/cards.svg" alt="...">
+                       Kredi Kartı <img class="ml-2" src="assets/img/brands/color/cards.svg" alt="...">
                       </label>
   
                     </div>
   
                   </div>
-                  <div class="list-group-item collapse py-0" id="checkoutPaymentCardCollapse">
+                  {{-- <div class="list-group-item collapse py-0" id="checkoutPaymentCardCollapse">
   
                     <!-- Form -->
                     <div class="form-row py-5">
@@ -347,18 +217,18 @@
                       </div>
                     </div>
   
-                  </div>
+                  </div> --}}
                   <div class="list-group-item">
   
                     <!-- Radio -->
                     <div class="custom-control custom-radio">
   
                       <!-- Input -->
-                      <input class="custom-control-input" id="checkoutPaymentPaypal" name="payment" type="radio" data-toggle="collapse" data-action="hide" data-target="#checkoutPaymentCardCollapse">
+                      <input value="havale" class="custom-control-input" id="checkoutPaymentPaypal" name="payment" type="radio" data-toggle="collapse" data-action="hide" data-target="#checkoutPaymentCardCollapse">
   
                       <!-- Label -->
                       <label class="custom-control-label font-size-sm text-body text-nowrap" for="checkoutPaymentPaypal">
-                        <img src="assets/img/brands/color/paypal.svg" alt="...">
+                        Havale <img src="assets/img/brands/color/paypal.svg" alt="...">
                       </label>
   
                     </div>
@@ -367,7 +237,7 @@
                 </div>
   
                 <!-- Notes -->
-                <textarea class="form-control form-control-sm mb-9 mb-md-0 font-size-xs" rows="5" placeholder="Order Notes (optional)"></textarea>
+                <textarea class="form-control form-control-sm mb-9 mb-md-0 font-size-xs" name="order_note" rows="5" placeholder="Order Notes (optional)"></textarea>
   
               </form>
   
@@ -465,8 +335,8 @@
               </p>
   
               <!-- Button -->
-              <button class="btn btn-block btn-dark">
-                Place Order
+              <button class="btn btn-block btn-dark" id="orderBtn">
+                Ödeme Yap
               </button>
   
             </div>
@@ -474,3 +344,11 @@
         </div>
       </section>
 @endsection
+
+@push('js')
+    <script>
+      $('#orderBtn').click(function(){
+$('#formOrder').trigger('submit');
+      });
+    </script>
+@endpush

@@ -10,10 +10,10 @@
               <!-- Breadcrumb -->
               <ol class="breadcrumb mb-0 font-size-xs text-gray-400">
                 <li class="breadcrumb-item">
-                  <a class="text-gray-400" href="index.html">Home</a>
+                  <a class="text-gray-400" href="{{ base_url() }}">Anasayfa</a>
                 </li>
                 <li class="breadcrumb-item active">
-                  Shopping Cart
+                  Sepet
                 </li>
               </ol>
   
@@ -29,7 +29,7 @@
             <div class="col-12">
   
               <!-- Heading -->
-              <h3 class="mb-10 text-center">Shopping Cart</h3>
+              <h3 class="mb-10 text-center">Sepet</h3>
   
             </div>
           </div>
@@ -37,14 +37,18 @@
             <div class="col-12 col-md-7">
   
               <!-- List group -->
+              
+              @if (getBasketSum() > 0)
               <ul class="list-group list-group-lg list-group-flush-x mb-6">
+                <?php $subTotal = 0; ?>
+                @foreach (App\Models\BasketProductsView::where(['user_id' => auth()->get('userLogin')['id'], 'basket_status' => 'aktif'])->get() as $item)
                 <li class="list-group-item">
                   <div class="row align-items-center">
                     <div class="col-3">
   
                       <!-- Image -->
                       <a href="product.html">
-                        <img src="assets/img/products/product-6.jpg" alt="..." class="img-fluid">
+                        <img class="img-fluid" src="{{ base_url($item->image_path . '/' . $item->small_image) }}" alt="{{ $item->title }}">
                       </a>
   
                     </div>
@@ -52,7 +56,17 @@
   
                       <!-- Title -->
                       <div class="d-flex mb-2 font-weight-bold">
-                        <a class="text-body" href="product.html">Cotton floral print</a> <span class="ml-auto">$40.00</span>
+                        <a class="text-body" href="product.html">{{ $item->title }}</a> <span class="ml-auto">
+                          <p class="font-size-sm font-weight-bold mb-6">
+                            @if ($item->sale_price && $item->sale_price > 0)
+                                <span
+                                    class="text-muted small text-decoration-line-through">{{ $item->price }}</span>
+                                <span class="text-primary">{{ $item->sale_price }}</span>
+                            @else
+                                <span class="text-primary">{{ $item->sale_price }}</span>
+                            @endif
+                        </p>
+                        </span>
                       </div>
   
                       <!-- Text -->
@@ -65,15 +79,15 @@
                       <div class="d-flex align-items-center">
   
                         <!-- Select -->
-                        <select class="custom-select custom-select-xxs w-auto">
-                          <option value="1">1</option>
-                          <option value="1">2</option>
-                          <option value="1">3</option>
-                        </select>
+                        <div>
+                          <div>
+                              Adet : {{ $item->count }}
+                          </div>
+                      </div>
   
                         <!-- Remove -->
-                        <a class="font-size-xs text-gray-400 ml-auto" href="#!">
-                          <i class="fe fe-x"></i> Remove
+                        <a class="font-size-xs text-gray-400 ml-auto" href="{{ base_url('basket-item-delete/' . $item->id) }}">
+                          <i class="fe fe-x"></i> Sil
                         </a>
   
                       </div>
@@ -81,85 +95,52 @@
                     </div>
                   </div>
                 </li>
-                <li class="list-group-item">
-                  <div class="row align-items-center">
-                    <div class="col-3">
-  
-                      <!-- Image -->
-                      <a href="product.html">
-                        <img src="assets/img/products/product-10.jpg" alt="..." class="img-fluid">
-                      </a>
-  
-                    </div>
-                    <div class="col">
-  
-                      <!-- Title -->
-                      <div class="d-flex mb-2 font-weight-bold">
-                        <a class="text-body" href="product.html">Suede cross body Bag</a> <span class="ml-auto">$49.00</span>
-                      </div>
-  
-                      <!-- Text -->
-                      <p class="mb-7 font-size-sm text-muted">
-                        Color: Brown
-                      </p>
-  
-                      <!--Footer -->
-                      <div class="d-flex align-items-center">
-  
-                        <!-- Select -->
-                        <select class="custom-select custom-select-xxs w-auto">
-                          <option value="1">1</option>
-                          <option value="1">2</option>
-                          <option value="1">3</option>
-                        </select>
-  
-                        <!-- Remove -->
-                        <a class="font-size-xs text-gray-400 ml-auto" href="#!">
-                          <i class="fe fe-x"></i> Remove
-                        </a>
-  
-                      </div>
-  
-                    </div>
-                  </div>
-                </li>
+                <?php
+                $subTotal += $item->sale_price && $item->sale_price > 0 ? $item->sale_price : $item->price;    
+               ?>
+                @endforeach
               </ul>
-  
-              <!-- Footer -->
-              <div class="row align-items-end justify-content-between mb-10 mb-md-0">
-                <div class="col-12 col-md-7">
-  
-                  <!-- Coupon -->
-                  <form class="mb-7 mb-md-0">
-                    <label class="font-size-sm font-weight-bold" for="cartCouponCode">
-                      Coupon code:
-                    </label>
-                    <div class="row form-row">
-                      <div class="col">
-  
-                        <!-- Input -->
-                        <input class="form-control form-control-sm" id="cartCouponCode" type="text" placeholder="Enter coupon code*">
-  
+
+                 <!-- Footer -->
+                 <div class="row align-items-end justify-content-between mb-10 mb-md-0">
+                  <div class="col-12 col-md-7">
+    
+                    <!-- Coupon -->
+                    <form class="mb-7 mb-md-0">
+                      <label class="font-size-sm font-weight-bold" for="cartCouponCode">
+                        Coupon code:
+                      </label>
+                      <div class="row form-row">
+                        <div class="col">
+    
+                          <!-- Input -->
+                          <input class="form-control form-control-sm" id="cartCouponCode" type="text" placeholder="Enter coupon code*">
+    
+                        </div>
+                        <div class="col-auto">
+    
+                          <!-- Button -->
+                          <button class="btn btn-sm btn-dark" type="submit">
+                            Apply
+                          </button>
+    
+                        </div>
                       </div>
-                      <div class="col-auto">
-  
-                        <!-- Button -->
-                        <button class="btn btn-sm btn-dark" type="submit">
-                          Apply
-                        </button>
-  
-                      </div>
-                    </div>
-                  </form>
-  
+                    </form>
+    
+                  </div>
+                  <div class="col-12 col-md-auto">
+    
+                    <!-- Button -->
+                    <button class="btn btn-sm btn-outline-dark">Update Cart</button>
+    
+                  </div>
                 </div>
-                <div class="col-12 col-md-auto">
+              @else 
+              <h1 class="mb-7 text-center">Sepetin Boş 😞</h1>
+              @endif
   
-                  <!-- Button -->
-                  <button class="btn btn-sm btn-outline-dark">Update Cart</button>
-  
-                </div>
-              </div>
+           
   
             </div>
             <div class="col-12 col-md-5 col-lg-4 offset-lg-1">
@@ -169,27 +150,33 @@
                 <div class="card-body">
                   <ul class="list-group list-group-sm list-group-flush-y list-group-flush-x">
                     <li class="list-group-item d-flex">
-                      <span>Subtotal</span> <span class="ml-auto font-size-sm">$89.00</span>
+                      <span>Ara Toplam: </span> <span class="ml-auto font-size-sm">{{money($subTotal)}}</span>
                     </li>
                     <li class="list-group-item d-flex">
-                      <span>Tax</span> <span class="ml-auto font-size-sm">$00.00</span>
+                      <?php 
+                       $kdv = $subTotal * (18/ 100);
+                      ?>
+                      <span>KDV: </span> <span class="ml-auto font-size-sm">{{  money(  $kdv  )   }}</span>
                     </li>
+  
+                    <li class="list-group-item d-flex">
+                      <span>Kargo : </span> <span class="ml-auto font-size-sm">{{  money( 15  )   }}</span>
+                    </li>
+  
                     <li class="list-group-item d-flex font-size-lg font-weight-bold">
-                      <span>Total</span> <span class="ml-auto font-size-sm">$89.00</span>
+                      <span>Genel Toplam: </span> <span class="ml-auto font-size-sm">{{ money( $subTotal +  $kdv + 15 ) }}</span>
                     </li>
-                    <li class="list-group-item font-size-sm text-center text-gray-500">
-                      Shipping cost calculated at Checkout *
-                    </li>
+                   
                   </ul>
                 </div>
               </div>
   
               <!-- Button -->
-              <a class="btn btn-block btn-dark mb-2" href="checkout.html">Proceed to Checkout</a>
+              <a class="btn btn-block btn-dark mb-2" href="{{base_url("odeme")}}">Ödeme Yap</a>
   
               <!-- Link -->
-              <a class="btn btn-link btn-sm px-0 text-body" href="shop.html">
-                <i class="fe fe-arrow-left mr-2"></i> Continue Shopping
+              <a class="btn btn-link btn-sm px-0 text-body" href="{{base_url("urunler")}}">
+                <i class="fe fe-arrow-left mr-2"></i> Alışverişe Devam Et
               </a>
   
             </div>

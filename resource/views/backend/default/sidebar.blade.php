@@ -57,6 +57,12 @@
             <span>Yetkililer</span></a>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link" href="{{ base_url('admin/siparisler') }}">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Siparişler</span></a>
+    </li>
+
     
 
     <!-- Divider -->

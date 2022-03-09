@@ -125,7 +125,9 @@
                   </div>
                   @foreach ($variant as $item)
                   <div class="col-md-3 bg-white rounded border">
-                   <input type="radio" name="{{ $key }}" value="{{ $item['id'] }}">{{ $item['variant_value'] }}
+                    <label>
+                   <input type="radio" name="variants[{{ $key }}]" value="{{ $item['id'] }}"><span class="ml-1">{{ $item['variant_value'] }}</span>
+                    </label>
                   </div>
                   @endforeach
                 </div>
@@ -139,7 +141,7 @@
                     <div class="col-12 col-lg-auto">
 
                       <!-- Quantity -->
-                      <select class="custom-select mb-2">
+                      <select class="custom-select mb-2" name="count">
                         <option value="1" selected>1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -156,7 +158,7 @@
                         Sepete Ekle <i class="fe fe-shopping-cart ml-2"></i>
                       </button>
                       @else
-                      <a href="/login" class="btn btn-block btn-dark mb-2">
+                      <a href="{{ base_url('giris-yap') }}" class="btn btn-block btn-dark mb-2">
                         Sepete Ekle
                       </a>
                       @endif
