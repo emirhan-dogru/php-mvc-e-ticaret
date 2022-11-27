@@ -23,7 +23,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex align-items-center justify-content-between ">
-            <h6 class="m-0 font-weight-bold text-primary">Siparişler</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Orders</h6>
            
         </div>
         <div class="card-body">
@@ -32,13 +32,13 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Adı ve Soyadı</th>
-                            <th>Adres</th> 
-                            <th>Telefon</th>
-                            <th>Sipariş Tarihi</th>
-                            <th>Sipariş Durumu</th>
-                            <th>Sipariş Tutarı</th>
-                            <th>İşlem</th>
+                            <th>Name and surname</th>
+                            <th>Address</th> 
+                            <th>Phone</th>
+                            <th>Order Date</th>
+                            <th>Order Status</th>
+                            <th>Order Price</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     
@@ -55,8 +55,8 @@
                                 <td> {{ $order->order_status }} </td>
                                 <td> {{ $order->order_price }} </td>
                                 <td> 
-                                   <button class="btn btn-primary btnEdit" data-id="{{$order->id}}" >Düzenle</button>
-                                   <button class="btn btn-success btnDetail" data-id="{{$order->id}}" >Detay</button>
+                                   <button class="btn btn-primary btnEdit" data-id="{{$order->id}}" >Edit</button>
+                                   <button class="btn btn-success btnDetail" data-id="{{$order->id}}" >Detail</button>
                                 </td>
                             </tr>
                         @endforeach
@@ -78,7 +78,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="editModalLabel"> Düzenle  </h5>
+          <h5 class="modal-title" id="editModalLabel"> Edit  </h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -89,15 +89,15 @@
                     <input type="hidden" name="id" value="">
 
                     <div class="form-group">
-                        <label>Sipariş Durumu </label>
+                        <label>Order Status </label>
                         <select name="order_status" class="form-control">
-                            <option value="Yeni Sipariş"> Yeni Sipariş </option>
-                            <option value="Sipariş Hazırlanıyor"> Sipariş Hazırlanıyor </option>
-                            <option value="Sipariş İptal Edildi"> Sipariş İptal Edildi </option>
-                            <option value="Sipariş Yola Çıktı"> Sipariş Yola Çıktı </option>
-                            <option value="Teslim Edilmedi"> Teslim Edilmedi </option>
-                            <option value="Teslim Edildi"> Teslim Edildi </option>
-                            <option value="Sipariş İade Edildi"> Sipariş İade Edildi </option>
+                            <option value="Yeni Sipariş"> New order </option>
+                            <option value="Sipariş Hazırlanıyor"> Order Preparing </option>
+                            <option value="Sipariş İptal Edildi"> Order Canceled </option>
+                            <option value="Sipariş Yola Çıktı"> Order is On The Way </option>
+                            <option value="Teslim Edilmedi"> Not Delivered </option>
+                            <option value="Teslim Edildi"> Was Delivered </option>
+                            <option value="Sipariş İade Edildi"> Order Returned </option>
                         </select>
                     </div>
                     
@@ -106,8 +106,8 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal</button>
-                <button type="submit" class="btn btn-primary">Kaydet</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save</button>
             </div>
        </form>
       </div>
@@ -120,7 +120,7 @@
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="detailModalLabel"> Detay  </h5>
+          <h5 class="modal-title" id="detailModalLabel"> Detail  </h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -174,11 +174,11 @@
                         
                             <table class="table table-sm bordered">
                                 <thead>
-                                    <th>Ürün Resmi</th>
-                                    <th>Ürün Adı</th>
-                                    <th>Ürün Ödenen Bedel</th>
-                                    <th>Adet</th>
-                                    <th>Opsiyonlar</th>
+                                    <th>Product İmage</th>
+                                    <th>Product Name</th>
+                                    <th>Product Price Paid</th>
+                                    <th>Piece</th>
+                                    <th>Options</th>
                                 </thead>
                                 <tbody>
                                     ${tableBody}
@@ -228,24 +228,24 @@
                     html = `
                     <div class="row">
                         <div class="col-md-6 bg-light border rounded">
-                            <h5>Sipariş N</h5>
+                            <h5>Order No</h5>
                             <span>#${order.id}</span>
                         </div>
                         <div class="col-md-6 bg-light border rounded">
-                            <h5>Sipariş Tarihi</h5>
+                            <h5>Order Date</h5>
                             <span>${order.created_at}</span>
                         </div>
 
                         <div class="col-md-12 my-3 bg-light border rounded">
-                            <h5>Teslim Adresi</h5>
+                            <h5>Delivery Address</h5>
                             
                             <div class="row">
                                 <div class="col-md-3">
-                                    <h5>Ad ve Soyad</h5>
+                                    <h5>Name and Surname</h5>
                                     <span>${order.first_name + " " + order.last_name}</span>
                                 </div>
                                 <div class="col-md-3">
-                                    <h5>Telefon no</h5>
+                                    <h5>Phone no</h5>
                                     <span>${order.phone}</span>
                                 </div>
                                 <div class="col-md-3">
@@ -253,11 +253,11 @@
                                     <span>${order.email}</span>
                                 </div>
                                 <div class="col-md-3">
-                                    <h5>İl - İlçe</h5>
+                                    <h5>City</h5>
                                     <span>${order.city + " / " + order.country}</span>
                                 </div>
                                 <div class="col-md-3">
-                                    <h5>Firma Adı</h5>
+                                    <h5>Company name</h5>
                                     <span>${order.campany_name}</span>
                                 </div>
                                 <div class="col-md-3">
@@ -268,27 +268,27 @@
                         </div>
                         
                         <div class="col-md-12 my-4 bg-light border rounded">
-                            <h5>Ödeme Bilgileri</h5>
+                            <h5>Payment information</h5>
                             
                             <div class="row">
                                 <div class="col-md-4">
-                                    <h5>Kargo Bedeli</h5>
+                                    <h5>Shipping Cost</h5>
                                     <span>${order.order_cargo_price}</span>
                                 </div>
                                 <div class="col-md-4">
-                                    <h5>Genel Tutar</h5>
+                                    <h5>General Amount</h5>
                                     <span>${order.order_genereal_price}</span>
                                 </div>
 
                                 <div class="col-md-4">
-                                    <h5>Toplam Tutar</h5>
+                                    <h5>Total amount</h5>
                                     <span>${parseFloat(order.order_cargo_price) + parseFloat(order.order_genereal_price)}</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-md-12 bg-light border rounded mb-4">
-                            <h5>Siparişi veren Kullanıcı Bilgileri</h5>
+                            <h5>User Information who placed the order</h5>
                             <span>${user.name_surname + " - "+user.email}</span>
                         </div>
 
@@ -299,11 +299,11 @@
                             
                             <table class="table table-sm bordered">
                                 <thead>
-                                    <th>Ürün Resmi</th>
-                                    <th>Ürün Adı</th>
-                                    <th>Ürün Ödenen Bedel</th>
-                                    <th>Adet</th>
-                                    <th>Opsiyonlar</th>
+                                    <th>Product Image</th>
+                                    <th>Product Name</th>
+                                    <th>Price</th>
+                                    <th>Piece</th>
+                                    <th>Options</th>
                                 </thead>
                                 <tbody>
                                    ${tableBody}
@@ -316,7 +316,7 @@
                     </div>
                     `;
                 } else {
-                    html = ` <h1> Detay verisi çekilemedi. Daha sonra tekrar deneyin </h1> `;
+                    html = ` <h1> Detail data could not be retrieved. try again later </h1> `;
                 }
 
                 $("#editModalBody").html(html)

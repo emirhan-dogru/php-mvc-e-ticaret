@@ -9,7 +9,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Login</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/admin-logo.ico">
+
+    <title>E.D Admin - Login</title>
 
     <!-- Custom fonts for this template-->
     <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -35,11 +37,10 @@
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-12">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Giriş Yap</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">Admin Panel</h1>
                                     </div>
                                     @include('backend.default.alert')
                                     
@@ -54,13 +55,10 @@
                                                 id="exampleInputPassword" placeholder="Password">
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
-                                           Giriş Yap
+                                           Login
                                         </button>
                                     </form>
                                     <hr>
-                                    <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
-                                    </div>
                                 </div>
                             </div>
                         </div>

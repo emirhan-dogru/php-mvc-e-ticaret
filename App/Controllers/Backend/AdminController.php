@@ -53,12 +53,12 @@ class AdminController extends Controller
                 header('Location:' . base_url('admin'));
                 exit();
             } else {
-                header('Location:' . base_url('admin/login?durum=hata&mesaj=E-posta veya şifre hatalı'));
+                header('Location:' . base_url('admin/login?durum=hata&mesaj=Email or password is incorrect'));
                 exit();
             }
         } else {
 
-            header('Location:' . base_url('admin/login?durum=hata&mesaj=E-posta veya şifre hatalı'));
+            header('Location:' . base_url('admin/login?durum=hata&mesaj=Email or password is incorrect'));
             exit();
         }
     }
@@ -74,7 +74,7 @@ class AdminController extends Controller
 'name_surname' => $name_surname
         ]);
 
-      $message = $add ? 'durum=basarili&mesaj=admin oluşturuldu' : 'durum=hata&mesaj=admin oluşturulamadı';
+      $message = $add ? 'durum=basarili&mesaj=admin created' : 'durum=hata&mesaj=Failed to create admin';
       header('Location:' . base_url('admin/yetkililer?' . $message));
       exit();
     }
@@ -96,14 +96,14 @@ class AdminController extends Controller
             );
 
             if ($update) {
-                redirect('admin/kullanicilar' , true , 'Admin Bilgileri Güncellendi');
+                redirect('admin/kullanicilar' , true , 'Admin Information Updated');
             }
             else {
-                redirect('admin/kullanicilar' , false , 'İşlem Başarısız');
+                redirect('admin/kullanicilar' , false , 'Status Failed');
             }
         }
         else {
-            redirect('admin/kullanicilar' , false , 'İşlem Başarısız');
+            redirect('admin/kullanicilar' , false , 'Status Failed');
         }
     }
 
@@ -121,14 +121,14 @@ class AdminController extends Controller
             );
 
             if ($update) {
-                redirect('admin/kullanicilar' , true , 'Kullanıcı Güncellendi');
+                redirect('admin/kullanicilar' , true , 'User Updated');
             }
             else {
-                redirect('admin/kullanicilar' , false , 'İşlem Başarısız');
+                redirect('admin/kullanicilar' , false , 'Status Failed');
             }
         }
         else {
-            redirect('admin/kullanicilar' , false , 'İşlem Başarısız');
+            redirect('admin/kullanicilar' , false , 'Status Failed');
         }
     }
 

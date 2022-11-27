@@ -77,7 +77,7 @@ class ApiController extends Controller
             response( 
                 [
                     "status" => true,
-                    "message" => "Sipariş Bilgileri",
+                    "message" => "Order Information",
                     "data" => [
                         "order" => $order,
                         "user" => $user ,
@@ -90,7 +90,7 @@ class ApiController extends Controller
             response( 
                 [
                     "status" => false,
-                    "message" => "Sipariş Bilgileri Çekilemedi!",
+                    "message" => "Order Information Not Found!",
                     "data" => null
                 ]
              );

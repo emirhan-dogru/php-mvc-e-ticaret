@@ -23,20 +23,7 @@
   <link rel="stylesheet" href="assets/css/theme.min.css">
 
   @stack('css')
-
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154926440-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-
-    gtag('config', 'UA-154926440-1');
-
-  </script>
+  
 
   <title>@yield('title' , 'E-Ticaret')</title>
 
@@ -279,6 +266,4 @@
 
 
   </body>
-
-<!-- Mirrored from yevgenysim.github.io/shopper/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Jan 2022 22:49:57 GMT -->
 </html>

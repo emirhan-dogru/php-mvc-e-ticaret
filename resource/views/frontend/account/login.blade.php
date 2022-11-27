@@ -4,56 +4,56 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 p-4">
-                <h2>Giriş Yap</h2>
+                <h2>Login</h2>
                 <form action="{{ base_url('giris-yap') }}" method="POST">
                     <div class="form-group">
-                        <label>E-posta Giriniz</label>
-                        <input type="email" placeholder="E-posta giriniz" class="form-control form-control-xs" name="email" required>
+                        <label>Email</label>
+                        <input type="email" placeholder="Email" class="form-control form-control-xs" name="email" required>
                     </div>
 
                     <div class="form-group">
-                        <label>Şifreninizi Giriniz</label>
-                        <input type="password" placeholder="Şifre giriniz" class="form-control form-control-xs" name="password" required>
+                        <label>Password</label>
+                        <input type="password" placeholder="Password" class="form-control form-control-xs" name="password" required>
                     </div>
 
-                    <button type="submit" class="btn btn-outline-secondary btn-xs">Giriş Yap</button>
+                    <button type="submit" class="btn btn-outline-secondary btn-xs">Login</button>
                 </form>
             </div>
 
             <div class="col-md-6 p-4">
-                <h2>Kayıt Ol</h2>
+                <h2>Register Now</h2>
                 <form action="{{ base_url('uye-ol') }}" method="POST">
                     <div class="form-group">
-                        <label>Ad ve Soyad</label>
-                        <input type="text" class="form-control form-control-xs" placeholder="Ad ve Soyad Giriniz"
+                        <label>Name and Surname</label>
+                        <input type="text" class="form-control form-control-xs" placeholder="Name and Surname"
                             name="name_surname" required>
                     </div>
 
                     <div class="form-group">
-                        <label>E-posta</label>
-                        <input type="email" class="form-control form-control-xs" placeholder="Eposta Giriniz" name="email"
+                        <label>Email</label>
+                        <input type="email" class="form-control form-control-xs" placeholder="Email" name="email"
                             required>
                     </div>
 
                     <div class="form-group">
-                        <label>Doğum Tarihi</label>
+                        <label>Birthdate</label>
                         <input type="date" class="form-control form-control-xs" name="birthdate" required>
                     </div>
 
                     <div class="form-group">
-                        <label>Şifre</label>
+                        <label>Password</label>
                         <input type="password" class="form-control form-control-xs" name="passwordone"
-                            placeholder="Şifrenizi belirleyin" required>
+                            placeholder="Password" required>
                     </div>
 
                     <div class="form-group">
-                        <label>Şifre Onayla</label>
+                        <label>Re Password</label>
                         <input type="password" class="form-control form-control-xs" name="passwordtwo"
-                            placeholder="Şifrenizi onaylayın" required>
+                            placeholder="Re Password" required>
                     </div>
 
                     <div class="form-group">
-                        <label>Özel Soru Seç</label>
+                        <label>Choose Custom Question</label>
                         <select class="form-control form-control-xs" name="question_type" required>
                             <option value="">Seçiniz</option>
                             @foreach (questions() as $key => $value)
@@ -63,12 +63,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Özel Soru Cevap</label>
-                        <input type="text" class="form-control form-control-xs" placeholder="Özel soru cevabı"
+                        <label>Private Question Value</label>
+                        <input type="text" class="form-control form-control-xs" placeholder="Private Question Value"
                             name="question_answer" required>
                     </div>
 
-                    <button type="submit" class="btn btn-primary btn-xs">Üye OL</button>
+                    <button type="submit" class="btn btn-primary btn-xs">REGISTER</button>
                 </form>
             </div>
         </div>

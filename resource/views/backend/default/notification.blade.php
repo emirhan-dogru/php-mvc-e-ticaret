@@ -14,11 +14,11 @@
     <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
         aria-labelledby="alertsDropdown">
         <h6 class="dropdown-header">
-           Bildirimler
+           Notifications
         </h6>
                                     
        @foreach (App\Models\AdminNotifications::where("isRead", 0)->get() as $item)
-        <a class="dropdown-item d-flex align-items-center" href="#">
+        <a class="dropdown-item d-flex align-items-center" href="javascript:void(0)">
                 <div class="mr-3">
                     <div class="icon-circle bg-{{$item->type}}">
                         @if ($item->type == "danger")

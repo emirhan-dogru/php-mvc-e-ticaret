@@ -10,13 +10,13 @@
               <!-- Breadcrumb -->
               <ol class="breadcrumb mb-0 font-size-xs text-gray-400">
                 <li class="breadcrumb-item">
-                  <a class="text-gray-400" href="{{ base_url() }}">Anasayfa</a>
+                  <a class="text-gray-400" href="{{ base_url() }}">Homepage</a>
                 </li>
                 <li class="breadcrumb-item">
-                  <a class="text-gray-400" href="{{ base_url('sepet') }}">Sepetim</a>
+                  <a class="text-gray-400" href="{{ base_url('sepet') }}">My Cart</a>
                 </li>
                 <li class="breadcrumb-item active">
-                  Ödeme
+                  Payment
                 </li>
               </ol>
   
@@ -32,7 +32,7 @@
             <div class="col-12 text-center">
   
               <!-- Heading -->
-              <h3 class="mb-4">Ödeme Detayları</h3>
+              <h3 class="mb-4">Payment Details</h3>
   
               <!-- Subheading -->
               <p class="mb-10">
@@ -48,7 +48,7 @@
               <form action="{{ base_url('add-order') }}" method="POST" id="formOrder">
   
                 <!-- Heading -->
-                <h6 class="mb-7">Gönderim Detayları</h6>
+                <h6 class="mb-7">Shipping Details</h6>
   
               <!-- Billing details -->
               <div class="row mb-9">
@@ -228,7 +228,7 @@
   
                       <!-- Label -->
                       <label class="custom-control-label font-size-sm text-body text-nowrap" for="checkoutPaymentPaypal">
-                        Havale <img src="assets/img/brands/color/paypal.svg" alt="...">
+                        Transfer <img src="assets/img/brands/color/paypal.svg" alt="...">
                       </label>
   
                     </div>
@@ -336,7 +336,7 @@
   
               <!-- Button -->
               <button class="btn btn-block btn-dark" id="orderBtn">
-                Ödeme Yap
+                Pay
               </button>
   
             </div>

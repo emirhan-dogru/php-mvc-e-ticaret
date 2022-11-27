@@ -32,7 +32,7 @@ class OrderController extends Controller
         $basketsItem =  BasketProductsView::where([
             "user_id" => $userID,
             "basket_status" => "aktif"
-        ])->get();
+        ])->limit(1)->get();
 
 
         foreach($basketsItem as $basketItem ){
@@ -95,11 +95,11 @@ class OrderController extends Controller
                     $updateBasket = Baskets::where("id", $item->id )->update(["basket_status" => "satin_alindi"]);
                     
                     if(!$updateBasket){
-                        throw "Siparişiniz Kayıt Olmadı";
+                        throw "Your Order Is Not Created";
                     }
 
                 } else {
-                    throw "Siparişiniz Kayıt Olmadı";
+                    throw "Your Order Is Created";
                 }
 
             }

@@ -33,12 +33,12 @@ class BasketController extends Controller
                     ]);
 
                     if (!$addVariants) {
-                        throw 'Varyasyon eklenemedi';
+                        throw 'Failed to add variation';
                     }
                 }
 
-                addAdminNotification('Bir kullanıcı sepete ürün ekledi', 'primary');
-                redirect('sepet', true, 'Sepete eklendi');
+                addAdminNotification('A user added a product to the cart', 'primary');
+                redirect('sepet', true, 'added to cart');
             }
         } catch (\Exception $e) {
             redirect('sepet', false, $e->getMessage());
@@ -48,13 +48,13 @@ class BasketController extends Controller
     public function DeleteItem($id)
     {
         if ($id) {
-            $delete = Baskets::where(['id' => $id, 'user_id' => auth()->get('userLogin')['id']])->update(['basket_status' => 'silindi']);
+            $delete = Baskets::where(['id' => $id, 'user_id' => auth()->get('userLogin')['id']])->update(['basket_status' => 'deleted']);
 
             if ($delete) {
-                redirect('sepet', true, 'Ürün sepetten silindi');
+                redirect('sepet', true, 'The product has been deleted from the cart');
             }
             else {
-                redirect('sepet', false, 'Ürün sepetten silinemedi');
+                redirect('sepet', false, 'The product could not be deleted from the cart');
             }
         }
     }

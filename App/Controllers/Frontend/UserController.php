@@ -24,12 +24,12 @@ class UserController extends Controller
                     'name' => $_POST['name_surname'],
                     'email' => $_POST['email']
                 ]);
-                header('Location:' . base_url('hesabim?durum=basarili&mesaj=Hesabınız oluşturuldu'));
+                header('Location:' . base_url('hesabim?durum=basarili&mesaj=Your account has been created'));
             } else {
-                header('Location:' . base_url('giris-yap?durum=hata&mesaj=Kayıt oluşurken bir hata oluştu'));
+                header('Location:' . base_url('giris-yap?durum=hata&mesaj=An error occurred while registering'));
             }
         } else {
-            header('Location:' . base_url('giris-yap?durum=hata&mesaj=Şifreler eşleşmiyor'));
+            header('Location:' . base_url('giris-yap?durum=hata&mesaj=Passwords do not match'));
             exit;
         }
     }
@@ -52,11 +52,11 @@ Auth()->create('userLogin' , [
                 header('Location:' . base_url('hesabim'));
             }
             else {
-                header('Location:' . base_url('giris-yap?durum=hata&mesaj=Lütfen bilgilerinizi kontrol edin'));
+                header('Location:' . base_url('giris-yap?durum=hata&mesaj=Please check your information'));
             }
         }
         else {
-           header('Location:' . base_url('giris-yap?durum=hata&mesaj=Lütfen bilgilerinizi kontrol edin'));
+           header('Location:' . base_url('giris-yap?durum=hata&mesaj=Please check your information'));
         }
     }
 }

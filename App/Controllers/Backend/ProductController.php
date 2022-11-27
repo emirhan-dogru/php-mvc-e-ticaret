@@ -54,7 +54,7 @@ class ProductController extends Controller{
 
                             $addProductVariant = ProductVariants::create($saveDate);
                             if(!$addProductVariant){
-                                throw "Ürün varyantı eklenirken hata oluştu. Daha Sonra tekrar deneyin";
+                                throw "An error occurred while adding the product variant. Try again later";
                             }
 
                         } 
@@ -99,7 +99,7 @@ class ProductController extends Controller{
                        $addImage = ProductImages::create( $saveImage );
 
                        if(!$addImage){
-                           throw "Resim yükleme işleminde hata meydane geldi";
+                           throw "An error occurred while uploading the image.";
                        }
 
                       }
@@ -113,7 +113,7 @@ class ProductController extends Controller{
                         $addCategory = ProductCategories::create( $saveCategory );
 
                         if(!$addCategory){
-                            throw "Ürün kategorisi eklenirken hata oluştu. Daha Sonra tekrar deneyin";
+                            throw "An error occurred while adding the product category. Try again later";
                         }
                         $imageOrder++;
                       }
@@ -125,12 +125,12 @@ class ProductController extends Controller{
                     ProductImages::commit();
                     ProductCategories::commit();
 
-                      redirect("admin/urunler", true, "Ürün ekleme işlemi başarılırıdır");
+                      redirect("admin/urunler", true, "Adding product is successful");
 
 
 
                 } else{
-                     throw "Ürün ekleme sırasında hata oluştu.";  
+                     throw "An error occurred while adding the product.";  
                 } 
             
            
@@ -164,7 +164,7 @@ class ProductController extends Controller{
                 ->update(["count" =>$value ]);  
             }
 
-            redirect("admin/siparisler", true, "İşlem başarılı");
+            redirect("admin/siparisler", true, "Status Success");
 
         } catch( Exception $e ){
             redirect("admin/siparisler", false, $e->getMessage() );

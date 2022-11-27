@@ -14,7 +14,7 @@ if (auth()->get('userLogin')) {
     return true;
 }
 else {
-    return new RedirectResponse(base_url('giris-yap?durum=hata&mesaj=Lütfen oturum açınız!'));
+    return new RedirectResponse(base_url('giris-yap?durum=hata&mesaj=Please Login Account!'));
     return false;
 }
 }

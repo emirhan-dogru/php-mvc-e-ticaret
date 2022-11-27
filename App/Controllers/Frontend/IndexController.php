@@ -4,6 +4,7 @@
 namespace App\Controllers\Frontend;
 
 use App\Models\GetCategoriesView;
+use App\Models\GetProductsView;
 use App\Models\OrderListsView;
 use App\Models\ProductImages;
 use App\Models\Products;
@@ -17,9 +18,15 @@ class IndexController extends Controller{
        return $this->view('frontend.default.index');
     }
 
-    public function ProductPage(){
-        return $this->view('frontend.product.index');
-     }
+   public function ProductPage($category_slug = null){
+      if ($category_slug == null) {
+         $product = GetProductsView::all();
+      }
+      else {
+         $product = GetProductsView::where(['category_slug' => $category_slug])->get();
+      }
+      return $this->view('frontend.product.index' , compact('product'));
+   }
 
      public function ProductDetailPage($slug , $id){
         $product = Products::where(['id' => $id , 'slug' => $slug])->get()->first();
@@ -41,6 +48,8 @@ class IndexController extends Controller{
 
             if ($categories) {
                 $categories = $categories->toArray();
+                $category_slug = $categories[0]['slug'];
+                $CategoryProduct = GetProductsView::where('category_slug' , $category_slug)->where('id' , '!=' , $id)->get();
             }
             else {
                 $categories = [];
@@ -63,7 +72,7 @@ class IndexController extends Controller{
 
        
    
-        return $this->view('frontend.product.detail' , compact('product' , 'images' , 'categories' , 'variants'));
+        return $this->view('frontend.product.detail' , compact('product' , 'images' , 'categories' , 'variants' , 'CategoryProduct'));
      }
 
      public function BasketPage(){

@@ -11,16 +11,16 @@
               <div class="mb-7 font-size-h1">🙁</div>
   
               <!-- Heading -->
-              <h2 class="mb-5">404. Sayfa Bulunamadı.</h2>
+              <h2 class="mb-5">404. Page Not Found.</h2>
   
               <!-- Text -->
               <p class="mb-7 text-gray-500">
-               Aradığınız sayfayı bulunamadı!
+                The page you were looking for was not found!
               </p>
   
               <!-- Button -->
               <a class="btn btn-dark" href="{{ base_url() }}">
-                Anasayfa
+                Homepage
               </a>
   
             </div>

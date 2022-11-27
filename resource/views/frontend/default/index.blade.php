@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
       <div class="col-12">
-        <h3 class="mb-10 text-center">Yeni Gelen Ürünler</h3>
+        <h3 class="mb-10 text-center">New Products</h3>
 
       </div>
     </div>

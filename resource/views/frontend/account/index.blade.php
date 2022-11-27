@@ -6,7 +6,7 @@
     <div class="col-12 text-center">
 
       <!-- Heading -->
-      <h3 class="mb-10">Hesabım</h3>
+      <h3 class="mb-10">My Account</h3>
 
     </div>
   </div>
@@ -19,7 +19,7 @@
 
 
           <a class="list-group-item list-group-item-action dropright-toggle" href="{{ base_url('logout') }}">
-            Çıkış Yap
+            Logout
           </a>
         </div>
       </nav>
@@ -41,7 +41,7 @@
                       <div class="col-6 col-lg-3">
 
                         <!-- Heading -->
-                        <h6 class="heading-xxxs text-muted">Sipariş No:</h6>
+                        <h6 class="heading-xxxs text-muted">Order No:</h6>
 
                         <!-- Text -->
                         <p class="mb-lg-0 font-size-sm font-weight-bold">
@@ -52,7 +52,7 @@
                       <div class="col-6 col-lg-3">
 
                         <!-- Heading -->
-                        <h6 class="heading-xxxs text-muted">Sipariş Tar:</h6>
+                        <h6 class="heading-xxxs text-muted">Order Date:</h6>
 
                         <!-- Text -->
                         <p class="mb-lg-0 font-size-sm font-weight-bold">
@@ -65,7 +65,7 @@
                       <div class="col-6 col-lg-3">
 
                         <!-- Heading -->
-                        <h6 class="heading-xxxs text-muted">Durum:</h6>
+                        <h6 class="heading-xxxs text-muted">Status:</h6>
 
                         <!-- Text -->
                         <p class="mb-0 font-size-sm font-weight-bold">
@@ -76,7 +76,7 @@
                       <div class="col-6 col-lg-3">
 
                         <!-- Heading -->
-                        <h6 class="heading-xxxs text-muted">Tutar:</h6>
+                        <h6 class="heading-xxxs text-muted">Price:</h6>
 
                         <!-- Text -->
                         <p class="mb-0 font-size-sm font-weight-bold">
@@ -94,7 +94,7 @@
                   <div class="col-12 col-lg-12">
                     <div class="form-row mb-4 mb-lg-0">             
                       
-                      @foreach (App\Models\OrderProductsView::where("order_id", $item["id"] )->get() as $product)
+                      @foreach (App\Models\OrderProductsView::where("order_id", $item["id"] )->limit(1)->get() as $product)
       
                         <div class="col-md-2">
                           <a href="{{ base_url("urun/".$product->slug."/".$product->product_id ) }}">

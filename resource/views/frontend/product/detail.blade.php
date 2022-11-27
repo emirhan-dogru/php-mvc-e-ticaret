@@ -27,7 +27,7 @@
                 <!-- Badge -->
                 @if($product['sale_price'] && $product['sale_price'] > 0) 
                 <div class="badge badge-primary card-badge text-uppercase">
-                  İndirim
+                  Discount
                 </div>
                 @endif
 
@@ -155,11 +155,11 @@
                       <!-- Submit -->
                       @if (auth()->get('userLogin'))
                       <button type="submit" class="btn btn-block btn-dark mb-2">
-                        Sepete Ekle <i class="fe fe-shopping-cart ml-2"></i>
+                        Add to Basket <i class="fe fe-shopping-cart ml-2"></i>
                       </button>
                       @else
                       <a href="{{ base_url('giris-yap') }}" class="btn btn-block btn-dark mb-2">
-                        Sepete Ekle
+                        Add to Basket
                       </a>
                       @endif
 
@@ -187,13 +187,13 @@
           <!-- Nav -->
           <div class="nav nav-tabs nav-overflow justify-content-start justify-content-md-center border-bottom">
             <a class="nav-link active" data-toggle="tab" href="#descriptionTab">
-              Açıklama
+              Description
             </a>
             <a class="nav-link" data-toggle="tab" href="#sizeTab">
-              Ölçü / Beden
+              Size / Body
             </a>
             <a class="nav-link" data-toggle="tab" href="#shippingTab">
-             Satış ve İade
+              Sales and Returns
             </a>
           </div>
 
@@ -319,6 +319,7 @@
     </div>
   </section>
 
+  @if(count($CategoryProduct))
   <!-- PRODUCTS -->
   <section class="pt-11">
     <div class="container">
@@ -326,10 +327,11 @@
         <div class="col-12">
 
           <!-- Heading -->
-          <h4 class="mb-10 text-center">İlginizi Çekebilecek Ürünler</h4>
+          <h4 class="mb-10 text-center">Products That Might Interest You</h4>
 
           <!-- Items -->
           <div class="row">
+            @foreach($CategoryProduct as $item)
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
 
               <!-- Card -->
@@ -340,9 +342,9 @@
                 <div class="card-img">
 
                   <!-- Image -->
-                  <a class="card-img-hover" href="product.html">
-                    <img class="card-img-top card-img-back" src="assets/img/products/product-122.jpg" alt="...">
-                    <img class="card-img-top card-img-front" src="assets/img/products/product-7.jpg" alt="...">
+                  <a class="card-img-hover" href="{{ base_url("urun/" . $item->slug . "/" . $item->id)  }}">
+                    <img class="card-img-top card-img-back" src="{{ base_url($item->image_path."/".$item->small_image) }}" alt="{{ $item->title }}">
+                    <img class="card-img-top card-img-front" src="{{ base_url($item->image_path."/".$item->small_image) }}" alt="{{ $item->title }}">
                   </a>
 
                   <!-- Actions -->
@@ -363,19 +365,35 @@
 
                   <!-- Category -->
                   <div class="font-size-xs">
-                    <a class="text-muted" href="#">Ayakkabı</a>
+                    <a class="text-muted" href="#">{{ $item->category_title }}</a>
                   </div>
 
                   <!-- Title -->
                   <div class="font-weight-bold">
-                    <a class="text-body" href="product.html">
-                     Ürün Adı
+                    <a class="text-body" href="{{ base_url("urun/" . $item->slug . "/" . $item->id)  }}">
+                      {{ $item->title }}
                     </a>
                   </div>
 
                   <!-- Price -->
                   <div class="font-weight-bold">
-                    <span class="text-primary">99.90 TL</span>
+                    @if( $item->sale_price > 0 )
+
+                  <div class="font-size-sm text-muted small">
+                    <del>  {{ $item->price }} TL</del>
+                   </div>
+
+                   <div class="font-size-sm font-weight-bold text-primary">
+                    {{ $item->sale_price }} TL
+                   </div>
+
+                  @else
+
+                  <div class="font-size-sm font-weight-bold text-primary">
+                    {{ $item->price }} TL
+                  </div>
+
+                  @endif
                   </div>
 
                 </div>
@@ -383,14 +401,16 @@
               </div>
 
             </div>
+            @endforeach
           </div>
 
         </div>
       </div>
     </div>
   </section>
+  @endif
 
-  <!-- REVIEWS -->
+  {{-- <!-- REVIEWS -->
   <section class="pt-9 pb-11" id="reviews">
     <div class="container">
       <div class="row">
@@ -671,5 +691,5 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> --}}
 @endsection

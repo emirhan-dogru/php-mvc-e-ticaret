@@ -16,10 +16,10 @@
       <!-- Nav -->
       <ul class="navbar-nav mx-auto">
         <li class="nav-item">
-          <a class="nav-link" href="{{ base_url() }}">Anasayfa</a>
+          <a class="nav-link" href="{{ base_url() }}">Homepage</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ base_url('urunler') }}">Ürünler</a>
+          <a class="nav-link" href="{{ base_url('urunler') }}">Product</a>
         </li>
       </ul>
 
@@ -49,7 +49,7 @@
         @else
         <li class="nav-item ml-lg-n4">
           <a class="nav-link" href="{{ base_url('giris-yap') }}">
-            <i class="fe fe-user"></i> Giriş Yap
+            <i class="fe fe-user"></i> Login
           </a>
         </li>
         @endif

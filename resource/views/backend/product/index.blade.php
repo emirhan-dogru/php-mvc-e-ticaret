@@ -7,12 +7,12 @@
         <div class="container-fluid">
 
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Ürünler</h1>
+<h1 class="h3 mb-2 text-gray-800">Products</h1>
 
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Ürünler</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Products</h6>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -20,13 +20,13 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Fotoğraf</th>
-                        <th>Ürün Adı</th>
-                        <th>Fiyatı</th>
-                        <th>İndirim</th>
-                        <th>Kategori</th>
-                        <th>Stok</th>
-                        <th>İşlem</th>
+                        <th>Image</th>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Discount</th>
+                        <th>Category</th>
+                        <th>Stock</th>
+                        {{-- <th>Process</th> --}}
                     </tr>
                 </thead>
                 <tbody>
@@ -39,7 +39,7 @@
                         <td>{{ $product->sale_price }}</td>
                         <td>-</td>
                         <td>{{ $product->stock }}</td>
-                        <td>buraya button gelicek</td>
+                        {{-- <td>buraya button gelicek</td> --}}
                     </tr>
                     @endforeach
                 </tbody>

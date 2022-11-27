@@ -10,13 +10,13 @@
 
         <!-- Header-->
         <div class="modal-header line-height-fixed font-size-lg">
-            <strong class="mx-auto">Sepetiniz ({{ getBasketSum() }})</strong>
+            <strong class="mx-auto">Your Cart ({{ getBasketSum() }})</strong>
         </div>
 
         @if (getBasketSum() > 0)
                 <ul class="list-group list-group-lg list-group-flush">
                     <?php $subTotal = 0; ?>
-                    @foreach (App\Models\BasketProductsView::where(['user_id' => auth()->get('userLogin')['id'], 'basket_status' => 'aktif'])->get() as $item)
+                    @foreach (App\Models\BasketProductsView::where(['user_id' => auth()->get('userLogin')['id'], 'basket_status' => 'aktif'])->limit(1)->get() as $item)
                         <li class="list-group-item">
                             <div class="row align-items-center">
                                 <div class="col-4">
@@ -48,7 +48,7 @@
                                         <!-- Select -->
                                         <div>
                                             <div>
-                                                Adet : {{ $item->count }}
+                                                Piece : {{ $item->count }}
                                             </div>
                                             <div>
                                                 @foreach (App\Models\BasketVariantsView::where('basket_id' , $item->id)->get() as $varitant)
@@ -60,7 +60,7 @@
         
                                         <!-- Remove -->
                                         <a class="font-size-xs text-gray-400 ml-auto" href="{{ base_url('basket-item-delete/' . $item->id) }}">
-                                            <i class="fe fe-x"></i> Sil
+                                            <i class="fe fe-x"></i> Remove
                                         </a>
         
                                     </div>
@@ -76,16 +76,16 @@
 
                 <!-- Footer -->
         <div class="modal-footer line-height-fixed font-size-sm bg-light mt-auto">
-            <strong>Ara Toplam</strong> <strong class="ml-auto">{{ money($subTotal) }}</strong>
+            <strong>Sub Total</strong> <strong class="ml-auto">{{ money($subTotal) }}</strong>
         </div>
 
         <!-- Buttons -->
         <div class="modal-body">
-            <a class="btn btn-block btn-dark" href="{{ base_url('urunler') }}">Alışverişe Devam Et</a>
-            <a class="btn btn-block btn-outline-dark" href="{{ base_url('sepet') }}">Sepete Git</a>
+            <a class="btn btn-block btn-dark" href="{{ base_url('urunler') }}">Continue Shopping</a>
+            <a class="btn btn-block btn-outline-dark" href="{{ base_url('sepet') }}">Go To Cart</a>
         </div>
         @else
-        <h6 class="mb-7 text-center">Sepetin Boş 😞</h6>
+        <h6 class="mb-7 text-center">Cart Empty 😞</h6>
         @endif
 
 

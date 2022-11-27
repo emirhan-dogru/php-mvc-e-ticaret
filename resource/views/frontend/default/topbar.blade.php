@@ -2,7 +2,7 @@
 
     <!-- Promo -->
     <div class="mr-xl-8">
-      <i class="fe fe-truck mr-2"></i> <span class="heading-xxxs">Ücretsiz Kargo</span>
+      <i class="fe fe-truck mr-2"></i> <span class="heading-xxxs">Free Shipping</span>
     </div>
 
 
