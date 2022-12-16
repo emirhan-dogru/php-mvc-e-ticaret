@@ -502,7 +502,7 @@ INSERT INTO `users` (`id`, `name_surname`, `email`, `password`, `birth_date`, `q
 --
 DROP TABLE IF EXISTS `basket_products_view`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `basket_products_view`  AS  select `baskets`.`id` AS `id`,`baskets`.`count` AS `count`,`baskets`.`basket_status` AS `basket_status`,`baskets`.`user_id` AS `user_id`,`baskets`.`product_id` AS `product_id`,`products`.`title` AS `title`,`products`.`price` AS `price`,`products`.`sale_price` AS `sale_price`,`product_images`.`image_path` AS `image_path`,`product_images`.`small_image` AS `small_image` from ((`baskets` join `products` on((`products`.`id` = `baskets`.`product_id`))) join `product_images` on((`product_images`.`product_id` = `products`.`id`))) where (`product_images`.`image_order` = 1) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=current_user SQL SECURITY DEFINER VIEW `basket_products_view`  AS  select `baskets`.`id` AS `id`,`baskets`.`count` AS `count`,`baskets`.`basket_status` AS `basket_status`,`baskets`.`user_id` AS `user_id`,`baskets`.`product_id` AS `product_id`,`products`.`title` AS `title`,`products`.`price` AS `price`,`products`.`sale_price` AS `sale_price`,`product_images`.`image_path` AS `image_path`,`product_images`.`small_image` AS `small_image` from ((`baskets` join `products` on((`products`.`id` = `baskets`.`product_id`))) join `product_images` on((`product_images`.`product_id` = `products`.`id`))) where (`product_images`.`image_order` = 1) ;
 
 -- --------------------------------------------------------
 
@@ -511,7 +511,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `basket_variants_view`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `basket_variants_view`  AS  select `basket_variants`.`basket_id` AS `basket_id`,`product_variants`.`variant_name` AS `variant_name`,`product_variants`.`variant_value` AS `variant_value` from (`basket_variants` join `product_variants` on((`product_variants`.`id` = `basket_variants`.`variant_id`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=current_user SQL SECURITY DEFINER VIEW `basket_variants_view`  AS  select `basket_variants`.`basket_id` AS `basket_id`,`product_variants`.`variant_name` AS `variant_name`,`product_variants`.`variant_value` AS `variant_value` from (`basket_variants` join `product_variants` on((`product_variants`.`id` = `basket_variants`.`variant_id`))) ;
 
 -- --------------------------------------------------------
 
@@ -520,7 +520,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `get_categories_view`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `get_categories_view`  AS  select `categories`.`id` AS `id`,`categories`.`title` AS `title`,`categories`.`slug` AS `slug`,`product_categories`.`product_id` AS `product_id`,`categories`.`status` AS `status` from (`product_categories` join `categories` on((`categories`.`id` = `product_categories`.`category_id`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=current_user SQL SECURITY DEFINER VIEW `get_categories_view`  AS  select `categories`.`id` AS `id`,`categories`.`title` AS `title`,`categories`.`slug` AS `slug`,`product_categories`.`product_id` AS `product_id`,`categories`.`status` AS `status` from (`product_categories` join `categories` on((`categories`.`id` = `product_categories`.`category_id`))) ;
 
 -- --------------------------------------------------------
 
@@ -529,7 +529,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `get_products_view`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `get_products_view`  AS  select `products`.`id` AS `id`,`products`.`title` AS `title`,`products`.`slug` AS `slug`,`products`.`price` AS `price`,`products`.`sale_price` AS `sale_price`,`products`.`stock` AS `stock`,`products`.`description` AS `description`,`products`.`created_at` AS `created_at`,`products`.`updated_at` AS `updated_at`,`product_images`.`small_image` AS `small_image`,`product_images`.`image_path` AS `image_path`,`categories`.`id` AS `category_id`,`categories`.`title` AS `category_title`,`categories`.`slug` AS `category_slug` from (((`products` join `product_images` on((`product_images`.`product_id` = `products`.`id`))) left join `product_categories` on((`product_categories`.`product_id` = `products`.`id`))) left join `categories` on((`categories`.`id` = `product_categories`.`category_id`))) group by `products`.`id` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=current_user SQL SECURITY DEFINER VIEW `get_products_view`  AS  select `products`.`id` AS `id`,`products`.`title` AS `title`,`products`.`slug` AS `slug`,`products`.`price` AS `price`,`products`.`sale_price` AS `sale_price`,`products`.`stock` AS `stock`,`products`.`description` AS `description`,`products`.`created_at` AS `created_at`,`products`.`updated_at` AS `updated_at`,`product_images`.`small_image` AS `small_image`,`product_images`.`image_path` AS `image_path`,`categories`.`id` AS `category_id`,`categories`.`title` AS `category_title`,`categories`.`slug` AS `category_slug` from (((`products` join `product_images` on((`product_images`.`product_id` = `products`.`id`))) left join `product_categories` on((`product_categories`.`product_id` = `products`.`id`))) left join `categories` on((`categories`.`id` = `product_categories`.`category_id`))) group by `products`.`id` ;
 
 -- --------------------------------------------------------
 
@@ -538,7 +538,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `order_lists_view`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `order_lists_view`  AS  select `orders`.`id` AS `id`,`orders`.`user_id` AS `user_id`,concat(`orders`.`country`,' / ',`orders`.`city`) AS `addres`,`orders`.`phone` AS `phone`,`orders`.`order_status` AS `order_status`,`orders`.`created_at` AS `created_at`,`orders`.`updated_at` AS `updated_at`,`users`.`name_surname` AS `name_surname`,`users`.`email` AS `email`,(select sum((`order_products`.`product_price` * `order_products`.`count`)) from `order_products` where (`order_products`.`order_id` = `orders`.`id`)) AS `order_price` from (`orders` join `users` on((`users`.`id` = `orders`.`user_id`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=current_user SQL SECURITY DEFINER VIEW `order_lists_view`  AS  select `orders`.`id` AS `id`,`orders`.`user_id` AS `user_id`,concat(`orders`.`country`,' / ',`orders`.`city`) AS `addres`,`orders`.`phone` AS `phone`,`orders`.`order_status` AS `order_status`,`orders`.`created_at` AS `created_at`,`orders`.`updated_at` AS `updated_at`,`users`.`name_surname` AS `name_surname`,`users`.`email` AS `email`,(select sum((`order_products`.`product_price` * `order_products`.`count`)) from `order_products` where (`order_products`.`order_id` = `orders`.`id`)) AS `order_price` from (`orders` join `users` on((`users`.`id` = `orders`.`user_id`))) ;
 
 -- --------------------------------------------------------
 
@@ -547,7 +547,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `order_products_view`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `order_products_view`  AS  select `order_products`.`id` AS `id`,`order_products`.`user_id` AS `user_id`,`order_products`.`product_id` AS `product_id`,`order_products`.`product_price` AS `product_price`,`order_products`.`count` AS `count`,`order_products`.`order_id` AS `order_id`,`products`.`title` AS `title`,`products`.`slug` AS `slug`,`product_images`.`image_path` AS `image_path`,`product_images`.`small_image` AS `small_image` from ((`order_products` join `products` on((`products`.`id` = `order_products`.`product_id`))) join `product_images` on((`product_images`.`product_id` = `products`.`id`))) where (`product_images`.`image_order` = 1) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=current_user SQL SECURITY DEFINER VIEW `order_products_view`  AS  select `order_products`.`id` AS `id`,`order_products`.`user_id` AS `user_id`,`order_products`.`product_id` AS `product_id`,`order_products`.`product_price` AS `product_price`,`order_products`.`count` AS `count`,`order_products`.`order_id` AS `order_id`,`products`.`title` AS `title`,`products`.`slug` AS `slug`,`product_images`.`image_path` AS `image_path`,`product_images`.`small_image` AS `small_image` from ((`order_products` join `products` on((`products`.`id` = `order_products`.`product_id`))) join `product_images` on((`product_images`.`product_id` = `products`.`id`))) where (`product_images`.`image_order` = 1) ;
 
 --
 -- Dökümü yapılmış tablolar için indeksler
